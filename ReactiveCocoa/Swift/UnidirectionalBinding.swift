@@ -278,3 +278,38 @@ extension BindingConsumer where ValueType: OptionalProtocol {
 		return consumer <~ property.producer
 	}
 }
+
+/// A type-erased view of a binding consumer.
+public class AnyBindingConsumer<Value>: BindingConsumer {
+	public typealias ValueType = Value
+
+	let sink: (Value) -> ()
+
+	/// The lifetime of this binding consumer. The binding operators use this to
+	/// determine whether or not the binding should be teared down.
+	public let lifetime: Lifetime
+
+	/// Wrap an binding consumer.
+	///
+	/// - parameter:
+	///   - consumer: The binding consumer to be wrapped.
+	public init<U: BindingConsumer where U.ValueType == Value>(_ consumer: U) {
+		self.sink = consumer.consume
+		self.lifetime = consumer.lifetime
+	}
+
+	/// Create a binding consumer.
+	///
+	/// - parameter:
+	///   - sink: The sink to receive the values from the binding.
+	///   - lifetime: The lifetime of the binding consumer.
+	public init(sink: (Value) -> (), lifetime: Lifetime) {
+		self.sink = sink
+		self.lifetime = lifetime
+	}
+
+	/// Consume a value.
+	public func consume(_ value: Value) {
+		sink(value)
+	}
+}
