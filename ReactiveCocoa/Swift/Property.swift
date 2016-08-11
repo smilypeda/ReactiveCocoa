@@ -484,30 +484,24 @@ public final class Property<Value>: PropertyProtocol {
 		// Share a replayed producer with `self.producer` and `self.signal` so
 		// they see a consistent view of the `self.value`.
 		// https://github.com/ReactiveCocoa/ReactiveCocoa/pull/3042
-		let producer = unsafeProducer.replayLazily(upTo: 1)
-		
-		// Verify that an initial is sent. This is friendlier than deadlocking
-		// in the event that one isn't.
-		var value: Value? = nil
-		let disposable = producer.start { event in
-			switch event {
-			case let .next(newValue):
-				value = newValue
-				
-			case .completed, .interrupted:
-				break
-				
-			case let .failed(error):
-				fatalError("Receive unexpected error from a producer of `NoError` type: \(error)")
-			}
-		}
-		guard value != nil else {
+		let (producer, first) = unsafeProducer._replayLazily(upTo: 1)
+
+		// Start the replay producer.
+		var hasInitial = false
+		producer
+			.on(next: { _ in hasInitial = true })
+			.start()
+			.dispose()
+
+		// Verify that an initial is sent. This is friendlier than deadlocking in
+		// the event that one isn't.
+		guard hasInitial else {
 			fatalError("A producer promised to send at least one value. Received none.")
 		}
-		disposable.dispose()
 
 		self.sources = sources
-		_value = { producer.take(first: 1).single()!.value! }
+
+		_value = first
 		_producer = { producer }
 		_signal = {
 			var extractedSignal: Signal<Value, NoError>!

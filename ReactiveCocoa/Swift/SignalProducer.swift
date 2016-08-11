@@ -1670,6 +1670,20 @@ extension SignalProducerProtocol {
 	/// - returns: A caching producer that will hold up to last `capacity`
 	///            values.
 	public func replayLazily(upTo capacity: Int) -> SignalProducer<Value, Error> {
+		return _replayLazily(upTo: capacity).producer
+	}
+
+	/// Create a replayed producer for `replayLazily` and composed properties.
+	///
+	/// - precondtion: `capacity` must be non-negative integer.
+	///
+	/// - parameters:
+	///   - capcity: Number of values to hold.
+	///
+	/// - returns: `producer`: a caching producer that will hold up to last
+	///            `capacity` values; `first`: a lense for composed properties to
+	///            read the head of the values cache.
+	internal func _replayLazily(upTo capacity: Int) -> (producer: SignalProducer<Value, Error>, first: () -> Value) {
 		precondition(capacity >= 0, "Invalid capacity: \(capacity)")
 
 		// This will go "out of scope" when the returned `SignalProducer` goes
@@ -1694,7 +1708,14 @@ extension SignalProducerProtocol {
 				}
 		}
 
-		return SignalProducer { observer, disposable in
+		// The values buffer would not be altered before the call-out to all
+		// observers of the replayed producer has completed. Therefore, for all
+		// `next` events, the same value would be observed from `Property.value`.
+		//
+		// Crash if no values is in the cache.
+		let firstValue = { state.withValue { $0.values[0] } }
+
+		let producer = SignalProducer<Value, Error> { observer, disposable in
 			// Don't dispose of the original producer until all observers
 			// have terminated.
 			disposable += { _ = lifetimeToken }
@@ -1726,6 +1747,8 @@ extension SignalProducerProtocol {
 				}
 			}
 		}
+
+		return (producer, firstValue)
 	}
 }
 
