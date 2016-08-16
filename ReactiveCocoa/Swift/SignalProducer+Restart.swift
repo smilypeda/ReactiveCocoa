@@ -11,8 +11,7 @@ import ReactiveCocoa
 
 extension SignalProducer {
 	
-	/// Creates the new signal producer that forwards all `Next` events from input and restarts the original one each time the input signal producer sends `Completed` event. Each restart should be delayed for delayInterval
-	/// them on the given scheduler.
+	/// Creates the new signal producer that forwards all `Next` events from input and restarts the original one each time the input signal producer sends `Completed` event. `Completed` event is sent for `Error` event from the input signal. Each restart should be delayed for delayInterval on the given scheduler.
 	///
 	/// - parameters:
 	///   - delayInterval: Interval to delay each restart loop
@@ -37,8 +36,11 @@ extension SignalProducer {
                     if let value = result.value {
                         observer.sendNext(value)
                     }
+					else if let _ = result.error {
+						observer.sendCompleted()
+					}
                 }
-                
+				
                 signal.observeCompleted {
                     recursiveRestartWithDelay()
                 }
