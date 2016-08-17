@@ -32,13 +32,20 @@ extension SignalProducer {
             func setupObservations(signal: ReactiveCocoa.Signal<Value, Error>, innerDisposable: Disposable) {
                 outerDisposable += innerDisposable
                 
-                signal.observeResult { result in
-                    if let value = result.value {
+                signal.observe { event in
+                    
+                    switch event {
+                        
+                    case .Next(let value):
                         observer.sendNext(value)
+                    
+                    case .Completed:
+                        recursiveRestartWithDelay()
+                    
+                    case .Failed:
+                        observer.sendCompleted()
+                    default: break
                     }
-					else if let _ = result.error {
-						observer.sendCompleted()
-					}
                 }
 				
                 signal.observeCompleted {
