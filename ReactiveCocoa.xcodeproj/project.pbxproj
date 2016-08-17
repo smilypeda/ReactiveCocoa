@@ -379,10 +379,6 @@
 		BEBDD6E81CDC292F009A75A9 /* RACDelegateProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = D037646B19EDA41200A782A9 /* RACDelegateProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BFA6B94D1A7604D400C846D1 /* SignalProducerNimbleMatchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA6B94A1A76044800C846D1 /* SignalProducerNimbleMatchers.swift */; };
 		BFA6B94E1A7604D500C846D1 /* SignalProducerNimbleMatchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA6B94A1A76044800C846D1 /* SignalProducerNimbleMatchers.swift */; };
-		C2348C4C1D62FEC20005C9C5 /* SignalProducer+Restart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2348C4B1D62FEC20005C9C5 /* SignalProducer+Restart.swift */; };
-		C2348C4D1D6307BF0005C9C5 /* SignalProducer+Restart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2348C4B1D62FEC20005C9C5 /* SignalProducer+Restart.swift */; };
-		C2348C4E1D6307BF0005C9C5 /* SignalProducer+Restart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2348C4B1D62FEC20005C9C5 /* SignalProducer+Restart.swift */; };
-		C2348C4F1D6307C00005C9C5 /* SignalProducer+Restart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2348C4B1D62FEC20005C9C5 /* SignalProducer+Restart.swift */; };
 		C7142DBC1CDEA167009F402D /* CocoaAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7142DBB1CDEA167009F402D /* CocoaAction.swift */; };
 		C7142DBD1CDEA194009F402D /* CocoaAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7142DBB1CDEA167009F402D /* CocoaAction.swift */; };
 		C7142DBE1CDEA194009F402D /* CocoaAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7142DBB1CDEA167009F402D /* CocoaAction.swift */; };
@@ -921,7 +917,6 @@
 		A9B315541B3940610001CB9C /* ReactiveCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReactiveCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B696FB801A7640C00075236D /* TestError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestError.swift; sourceTree = "<group>"; };
 		BFA6B94A1A76044800C846D1 /* SignalProducerNimbleMatchers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignalProducerNimbleMatchers.swift; path = Swift/SignalProducerNimbleMatchers.swift; sourceTree = "<group>"; };
-		C2348C4B1D62FEC20005C9C5 /* SignalProducer+Restart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SignalProducer+Restart.swift"; sourceTree = "<group>"; };
 		C7142DBB1CDEA167009F402D /* CocoaAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocoaAction.swift; sourceTree = "<group>"; };
 		C79B64731CD38B2B003F2376 /* TestLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestLogger.swift; sourceTree = "<group>"; };
 		C79B647B1CD52E23003F2376 /* EventLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLogger.swift; sourceTree = "<group>"; };
@@ -1608,7 +1603,6 @@
 		D03B4A3919F4C25F009E02AC /* Signals */ = {
 			isa = PBXGroup;
 			children = (
-				C2348C4B1D62FEC20005C9C5 /* SignalProducer+Restart.swift */,
 				D08C54AF1A69A2AC00AD8286 /* Action.swift */,
 				C7142DBB1CDEA167009F402D /* CocoaAction.swift */,
 				CD0C45DD1CC9A288009F5BF0 /* DynamicProperty.swift */,
@@ -2417,7 +2411,6 @@
 				57A4D1F71BA13D7A00F7D4B1 /* RACSignal+Operations.m in Sources */,
 				57A4D1F81BA13D7A00F7D4B1 /* RACSignalSequence.m in Sources */,
 				57A4D1F91BA13D7A00F7D4B1 /* RACStream.m in Sources */,
-				C2348C4D1D6307BF0005C9C5 /* SignalProducer+Restart.swift in Sources */,
 				57A4D1FA1BA13D7A00F7D4B1 /* RACStringSequence.m in Sources */,
 				CD0C45E11CC9A288009F5BF0 /* DynamicProperty.swift in Sources */,
 				57A4D1FB1BA13D7A00F7D4B1 /* RACSubject.m in Sources */,
@@ -2547,7 +2540,6 @@
 				A9B3157A1B3940750001CB9C /* RACBehaviorSubject.m in Sources */,
 				A9B3157B1B3940750001CB9C /* RACBlockTrampoline.m in Sources */,
 				A9B3157C1B3940750001CB9C /* RACChannel.m in Sources */,
-				C2348C4E1D6307BF0005C9C5 /* SignalProducer+Restart.swift in Sources */,
 				A9B3157D1B3940750001CB9C /* RACCommand.m in Sources */,
 				A9B3157E1B3940750001CB9C /* RACCompoundDisposable.m in Sources */,
 				A9B3157F1B3940750001CB9C /* RACDelegateProxy.m in Sources */,
@@ -2641,7 +2633,6 @@
 				D03765A419EDA41200A782A9 /* RACMulticastConnection.m in Sources */,
 				D037654E19EDA41200A782A9 /* RACArraySequence.m in Sources */,
 				D037652219EDA41200A782A9 /* NSObject+RACLifting.m in Sources */,
-				C2348C4C1D62FEC20005C9C5 /* SignalProducer+Restart.swift in Sources */,
 				D037650619EDA41200A782A9 /* NSIndexSet+RACSequenceAdditions.m in Sources */,
 				D037650E19EDA41200A782A9 /* NSNotificationCenter+RACSupport.m in Sources */,
 				D03765FA19EDA41200A782A9 /* RACSubscriptionScheduler.m in Sources */,
@@ -2825,7 +2816,6 @@
 				D037654B19EDA41200A782A9 /* NSUserDefaults+RACSupport.m in Sources */,
 				D037660F19EDA41200A782A9 /* RACUnarySequence.m in Sources */,
 				D08C54BB1A69C54400AD8286 /* Property.swift in Sources */,
-				C2348C4F1D6307C00005C9C5 /* SignalProducer+Restart.swift in Sources */,
 				D03765FF19EDA41200A782A9 /* RACTargetQueueScheduler.m in Sources */,
 				D03765DF19EDA41200A782A9 /* RACSignalSequence.m in Sources */,
 				D037656D19EDA41200A782A9 /* RACDelegateProxy.m in Sources */,
