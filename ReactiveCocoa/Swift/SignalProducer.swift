@@ -2004,10 +2004,6 @@ extension SignalProducerType {
 					default: break
 					}
 				}
-				
-				signal.observeCompleted {
-					recursiveRestartWithDelay()
-				}
 			}
 			
 			self.startWithSignal { signal, innerDisposable in
